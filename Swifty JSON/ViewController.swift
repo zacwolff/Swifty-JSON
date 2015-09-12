@@ -55,7 +55,7 @@ class ViewController: UIViewController, UITextFieldDelegate
             
             let phoneText = self.phone.text
             let pinText = self.pin.text
-            
+            /*
             Alamofire.request(.GET, "http://10.43.33.51:8000/api/v1/agent/\(pinText)/\(phoneText)").responseJSON()
             {
                 (_, _, data, _) in
@@ -76,6 +76,29 @@ class ViewController: UIViewController, UITextFieldDelegate
                 }
 
                 println(data)
+            }
+            */
+            
+            Alamofire.request(.GET, "https://jat-testing.herokuapp.com/api/v1/agent/\(pinText)/\(phoneText)").responseJSON()
+                {
+                    (_, _, data, _) in
+                    
+                    if data == nil
+                    {
+                        var alertView:UIAlertView = UIAlertView()
+                        alertView.title = "Incorrect Pin"
+                        alertView.delegate = self
+                        alertView.addButtonWithTitle("Okay")
+                        alertView.show()
+                        
+                        self.indicator.stopAnimating()
+                    }
+                    else
+                    {
+                        
+                    }
+                    
+                    println(data)
             }
         }
     }
